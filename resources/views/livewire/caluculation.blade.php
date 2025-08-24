@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate.Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/**
- * URLのパラメータを受け取り、計算処理を行うルート
- * 例: /calcs/10/addition/5
- */
+// URLのパラメータを受け取り、計算処理を行うルート
 Route::get('/calcs/{val1}/{operator}/{val2}', function ($val1, $operator, $val2) {
 
     $result = 0;
@@ -31,7 +28,7 @@ Route::get('/calcs/{val1}/{operator}/{val2}', function ($val1, $operator, $val2)
     if (!is_numeric($val1) || !is_numeric($val2)) {
         $error = 'URLの「値」には、数値を指定してください。';
     } else {
-        // 演算子の文字列に応じて計算を分岐 [cite: 8]
+        // 演算子の文字列に応じて計算を分岐
         switch ($operator) {
             case 'addition':
                 $result = $val1 + $val2;
@@ -60,7 +57,6 @@ Route::get('/calcs/{val1}/{operator}/{val2}', function ($val1, $operator, $val2)
     }
 
     // 計算結果やエラーメッセージをビューに渡す
-    // 'calculation' という名前のビューファイル（例: calculation.blade.php）を呼び出す
     return view('calculation', [
         'val1' => $val1,
         'val2' => $val2,
